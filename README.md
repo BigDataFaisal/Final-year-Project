@@ -28,26 +28,6 @@ Due to licensing restrictions, the dataset is **not included** in this repositor
 Dataset source:  
 https://github.com/google-research/google-research/tree/master/goemotions
 
----
-
-## Repository Structure
-notebooks/
-├── 01_eda.ipynb
-├── 02_preprocessing.ipynb
-├── 03_baseline_model.ipynb
-└── 04_roberta_prototype.ipynb
-
-figures/
-├── fig1_stakeholder_onion.png
-├── fig2_emotion_distribution.png
-├── fig3_text_length.png
-├── fig4_model_comparison.png
-└── fig5_gantt_chart.png
-
-yaml
-Copy code
-
----
 
 ## Models Implemented
 
@@ -62,7 +42,6 @@ Copy code
 - Trained on a reduced subset of the dataset for computational feasibility
 - Evaluated using macro and micro F1-score
 
----
 
 ## Interim Results
 - The baseline model provides a useful performance benchmark
@@ -71,14 +50,12 @@ Copy code
 
 Visualisations and performance comparisons are available in the `figures/` directory.
 
----
 
 ## Reproducibility
 All experiments were conducted in **Google Colab** using Python.
 Each notebook can be run independently after downloading the GoEmotions dataset
 and uploading it to the Colab environment.
 
----
 
 ## Assessment Context
 This repository supports the following assessments:
@@ -86,9 +63,7 @@ This repository supports the following assessments:
 - **Interim Progress Demonstration (IPD)**
 - **Final Year Project (FYP)**
 
----
-
 ## Author
-Student Name  
+Student Name  Faisal Qaderi
 BSc Data Science and Analytics  
 University of Westminster
