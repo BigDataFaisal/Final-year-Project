@@ -1,69 +1,76 @@
-# AI-Powered Reflective Diary – Emotion Classification
+AI-Powered Reflective Diary – Emotion Classification (IPD)
 
-This repository contains the interim implementation for a Final Year Project exploring
-fine-grained emotion classification to support an AI-powered reflective diary system.
+This repository contains the interim (IPD) implementation for a Final Year Project investigating multi-label emotion classification to support an AI-powered reflective diary system.
 
-The project investigates how natural language processing techniques can be used to
-identify emotions from short reflective text, with an emphasis on ethical, non-clinical,
-and user-supportive design.
+The project explores how transformer-based NLP models can detect fine-grained emotions from short reflective text, with an emphasis on ethical, non-clinical, and supportive design.
 
----
+Project Objectives
 
-## Project Objectives
-- Explore and analyse the GoEmotions dataset
-- Develop a reproducible preprocessing and modelling pipeline
-- Implement a baseline multi-label emotion classifier
-- Prototype a transformer-based model for emotion detection
-- Evaluate model performance using appropriate multi-label metrics
-- Establish a foundation for final system development
+Analyse and understand the GoEmotions dataset
 
----
+Build a reproducible preprocessing and modelling pipeline
 
-## Dataset
-This project uses the **GoEmotions** dataset, which contains approximately 43,000 Reddit
-comments annotated across 28 emotion categories.
+Implement a domain-specific transformer baseline
 
-Due to licensing restrictions, the dataset is **not included** in this repository.
+Prototype a general-purpose transformer model
 
-Dataset source:  
+Evaluate performance using multi-label metrics (macro & micro F1)
+
+Dataset
+
+The project uses the GoEmotions dataset (~43,000 Reddit comments, 28 emotion labels).
+
+The dataset is not included due to licensing restrictions.
+
+Dataset source:
 https://github.com/google-research/google-research/tree/master/goemotions
 
+Models Implemented
+Transformer Baseline
 
-## Models Implemented
+ClinicalBERT (domain-specific transformer)
 
-### Baseline Model
-- TF-IDF vectorisation (unigrams and bigrams)
-- One-vs-Rest Logistic Regression
-- Evaluated using macro and micro F1-score
+Multi-label classification with sigmoid activation
 
-### Transformer Prototype
-- RoBERTa-base
-- Multi-label classification with sigmoid activation
-- Trained on a reduced subset of the dataset for computational feasibility
-- Evaluated using macro and micro F1-score
+Trained on a reduced 5,000-sample subset (IPD feasibility)
 
+Evaluated using macro and micro F1-score
 
-## Interim Results
-- The baseline model provides a useful performance benchmark
-- The transformer-based approach shows improved performance for frequently occurring emotions
-- Results highlight challenges related to class imbalance and fine-grained emotion detection
+Transformer Prototype
 
-Visualisations and performance comparisons are available in the `figures/` directory.
+RoBERTa-base
 
+Identical experimental setup to the baseline
 
-## Reproducibility
-All experiments were conducted in **Google Colab** using Python.
-Each notebook can be run independently after downloading the GoEmotions dataset
-and uploading it to the Colab environment.
+Used to assess domain-specific vs general-purpose performance
 
+Interim Results
 
-## Assessment Context
-This repository supports the following assessments:
-- **Project Proposal and Specification (PPS)**
-- **Interim Progress Demonstration (IPD)**
-- **Final Year Project (FYP)**
+Both models demonstrate stronger micro F1 than macro F1, reflecting class imbalance
 
-## Author
-Student Name  Faisal Qaderi
-BSc Data Science and Analytics  
+RoBERTa shows marginally stronger performance on frequent emotions
+
+Results validate feasibility and highlight areas for final optimisation
+
+Figures and performance comparisons are provided in the repository.
+
+Reproducibility
+
+All experiments were conducted in Google Colab using Python and Hugging Face.
+Notebooks can be executed after downloading and uploading the GoEmotions dataset.
+
+Assessment Context
+
+This repository supports:
+
+Project Proposal Specification (PPS)
+
+Interim Progress Demonstration (IPD)
+
+Final Year Project (FYP)
+
+Author
+
+Faisal Qaderi
+BSc (Hons) Data Science and Analytics
 University of Westminster
