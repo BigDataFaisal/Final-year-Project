@@ -1,4 +1,4 @@
-# AI-Powered Reflective Diary – Emotion Classification (IPD)
+# AI Diary – Emotion Classification (IPD)
 
 This repository contains the **interim (IPD) implementation** for a Final Year Project investigating **multi-label emotion classification** to support an AI-powered reflective diary system.
 
