@@ -47,6 +47,9 @@ https://github.com/google-research/google-research/tree/master/goemotions
 
 Figures and performance comparisons are provided in the repository.
 
+YouTube video link of explanation and demonstration of this prototype
+- https://youtu.be/z1PQxvvUhIw
+
 ---
 
 ## Reproducibility
