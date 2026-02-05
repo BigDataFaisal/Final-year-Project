@@ -18,10 +18,11 @@ The project explores how **transformer-based NLP models** can detect fine-graine
 ## Dataset
 The project uses the **GoEmotions dataset** (~43,000 Reddit comments, 28 emotion labels).
 
-The dataset is **not included** due to licensing restrictions.
+The GoEmotions dataset is not included in this repository due to licensing restrictions; instead, the official train, development, and test splits (train.tsv, dev.tsv, test.tsv, and emotions.txt) were downloaded directly from the original GoEmotions release and used locally for all experiments
 
 **Dataset source:**  
 https://github.com/google-research/google-research/tree/master/goemotions
+
 
 ---
 
