@@ -1,4 +1,4 @@
-# AI Diary — Emotion Classification System
+# AI Diary : Emotion Classification System
 
 Final Year Project | BSc (Hons) Data Science and Analytics | University of Westminster
 
