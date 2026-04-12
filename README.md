@@ -17,12 +17,12 @@ The project explores how transformer-based NLP models can support emotional self
 | File | Description |
 |---|---|
 | `01_EDA.ipynb` | Exploratory data analysis of the GoEmotions dataset including class distribution, text length analysis, and label frequency charts |
-| `02_IPD.ipynb` | ClinicalBERT baseline and RoBERTa prototype trained on 5,000 samples for one epoch — submitted as the Interim Progress Demonstration |
+| `02_IPD.ipynb` | ClinicalBERT baseline and RoBERTa prototype trained on 5,000 samples for one epoch : submitted as the Interim Progress Demonstration |
 | `03_FinalModel.ipynb` | Full RoBERTa training on 43,410 samples across three epochs with class-weighted loss, test set evaluation, survey analysis, and reflection system |
-| `app.py` | Streamlit dashboard — run locally with the trained model for the full interactive prototype |
+| `app.py` | Streamlit dashboard : run locally with the trained model for the full interactive prototype |
 | `requirements.txt` | Python dependencies for local and cloud deployment |
-| `survey1_psychology.csv` | Survey 1 responses — 11 psychology student participants |
-| `survey2_General.csv` | Survey 2 responses — 20 general participants including open-text diary entries used for model validation |
+| `survey1_psychology.csv` | Survey 1 responses : 11 psychology student participants |
+| `survey2_General.csv` | Survey 2 responses : 20 general participants including open-text diary entries used for model validation |
 | `README.md` | This file |
 
 ---
@@ -32,7 +32,7 @@ The project explores how transformer-based NLP models can support emotional self
 The project uses the GoEmotions dataset published by Google Research (Demszky et al., 2020).
 
 - 58,009 Reddit comments annotated across 28 fine-grained emotion categories
-- Multi-label — a single comment can carry more than one emotion simultaneously
+- Multi-label : a single comment can carry more than one emotion simultaneously
 - Pre-divided into fixed train, development, and test splits
 
 | Split | Samples | Purpose |
@@ -64,11 +64,11 @@ The jump from Macro F1 0.02 to 0.52 was produced by three compounding changes: u
 
 ## Key Technical Decisions
 
-- **Sigmoid activation** instead of softmax — allows multi-label prediction so multiple emotions can be detected from a single entry simultaneously
-- **Threshold 0.3** — tuned during the prototype phase to improve recall on rare emotions that the model assigns probabilities between 0.3 and 0.5
-- **Class-weighted BCEWithLogitsLoss** — rare emotions like grief receive higher weights so the model is penalised more heavily for missing them
-- **RoBERTa-base** — outperforms domain-specific ClinicalBERT on informal conversational text
-- **Template-based reflections** — 28 pre-written responses for ethical safety and predictability in a mental health adjacent context
+- **Sigmoid activation** instead of softmax : allows multi-label prediction so multiple emotions can be detected from a single entry simultaneously
+- **Threshold 0.3** : tuned during the prototype phase to improve recall on rare emotions that the model assigns probabilities between 0.3 and 0.5
+- **Class-weighted BCEWithLogitsLoss** : rare emotions like grief receive higher weights so the model is penalised more heavily for missing them
+- **RoBERTa-base** : outperforms domain-specific ClinicalBERT on informal conversational text
+- **Template-based reflections** : 28 pre-written responses for ethical safety and predictability in a mental health adjacent context
 
 ---
 
@@ -91,8 +91,8 @@ If the model folder is not found, the app automatically falls back to keyword-ba
 
 Two surveys were conducted as part of the project validation.
 
-- `survey1_psychology.csv` — 11 psychology student responses covering comfort scores, feature preferences, and ethical considerations around the AI Diary concept
-- `survey2_General.csv` — 20 general participant responses including open-text diary entries that were processed through the trained model to produce a real-world agreement score of 0.1471
+- `survey1_psychology.csv` : 11 psychology student responses covering comfort scores, feature preferences, and ethical considerations around the AI Diary concept
+- `survey2_General.csv` : 20 general participant responses including open-text diary entries that were processed through the trained model to produce a real-world agreement score of 0.1471
 
 ---
 
