@@ -26,7 +26,6 @@ import numpy as np
 # Page configuration
 st.set_page_config(
     page_title="AI Diary",
-    page_icon="📔",
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -36,7 +35,7 @@ st.set_page_config(
 MODEL_PATH = "/Users/faisal/Desktop/Final project/final year project fyp/Final year code/roberta_final_model"
  
 # ======================================================
-# GoEmotions emotion labels, must match the training order
+# GoEmotions emotion labels
 EMOTIONS = [
     "admiration", "amusement", "anger", "annoyance", "approval", "caring",
     "confusion", "curiosity", "desire", "disappointment", "disapproval",
@@ -46,7 +45,6 @@ EMOTIONS = [
 ]
 # ======================================================
 # Reflection templates, one per GoEmotions emotion
-
 TEMPLATES = {
     "admiration":    "It is clear that something or someone has genuinely impressed you. That kind of appreciation is worth holding onto.",
     "amusement":     "It is good to hear that something brought a smile today. Moments of lightness are always worth noticing.",
@@ -73,7 +71,7 @@ TEMPLATES = {
     "realization":   "It sounds like something has clicked for you. Those moments of clarity can be really significant, even when they arrive quietly.",
     "relief":        "It is clear that a weight has been lifted. Allow yourself to enjoy that feeling, you have earned it.",
     "remorse":       "Feeling remorse means you have a strong sense of what matters to you. That self-awareness is a foundation you can build on.",
-    "sadness":       "It sounds like things have been quite heavy recently. That is completely okay,cd  sometimes sitting with difficult feelings is part of processing them.",
+    "sadness":       "It sounds like things have been quite heavy recently. That is completely okay, sometimes sitting with difficult feelings is part of processing them.",
     "surprise":      "It sounds like something caught you off guard. Give yourself a moment to settle before deciding how to respond.",
     "neutral":       "Thank you for taking the time to write this down. Sometimes putting thoughts into words is valuable in itself.",
 }
@@ -127,8 +125,7 @@ section[data-testid="stSidebar"]{background:#0a0f1e;border-right:1px solid rgba(
  
 # ====================================================== 
 # Load the trained RoBERTa mode
-# cache_resource loads the model once and keeps it in memory for the session
-@st.cache_resource(show_spinner="Loading AI model : about 30 seconds on first run...")
+@st.cache_resource(show_spinner="Loading AI model, about 30 seconds on first run.. .")
 def load_model():
     try:
         tokeniser = AutoTokenizer.from_pretrained(MODEL_PATH)
@@ -142,7 +139,7 @@ def load_model():
         return None, None, None, False
  
 # ======================================================
-# Keyword fallback — used only if model cannot be loaded
+# Keyword fallback : used only if model cannot be loaded
 EMOTION_KEYWORDS = {
     "joy":           r"\b(happy|happiness|great|amazing|wonderful|excited|good|fantastic|brilliant|glad|pleased|delighted|thrilled|joyful|cheerful|fun|enjoy)\b",
     "sadness":       r"\b(sad|unhappy|depressed|down|miserable|cry|crying|tears|upset|heartbroken|broken|grief|miss|missing|lost|alone|lonely|hurt|pain)\b",
@@ -179,12 +176,6 @@ def keyword_fallback(text):
 # ======================================================
 # Emotion detection
 def detect_emotions(text, threshold=0.3):
-    """
-    Runs text through the RoBERTa model.
-    Sigmoid converts logits to per-emotion probabilities.
-    Any emotion above the threshold (0.3) is predicted as present.
-    The primary emotion is the one with the highest probability.
-    """
     tokeniser, model, device, loaded = load_model()
     if not loaded:
         return keyword_fallback(text)
@@ -220,7 +211,7 @@ def build_response(text):
         f'<div style="margin-bottom:9px;">'
         f'<span style="font-size:11px;color:#475569;font-weight:500;">Detected emotions</span><br>'
         f'{tags}</div>'
-        f'<div class="reflection-box">💬 {reflection}</div>'
+        f'<div class="reflection-box"> {reflection}</div>'
     )
     if tip:
         html += f'<div class="tip-box">{tip}</div>'
@@ -229,7 +220,7 @@ def build_response(text):
  
 def show_disclaimer():
     st.markdown(
-        '<div class="disclaimer">🔒 This is a prototype application. '
+        '<div class="disclaimer"> This is a prototype application. '
         'Your data will not be accessed, used, or shared. '
         'This is purely for demonstration purposes.</div>',
         unsafe_allow_html=True
@@ -250,7 +241,7 @@ for key, default in {
 
 def login_page():
     show_disclaimer()
-    st.markdown('<div class="login-title">📔 AI Diary</div>', unsafe_allow_html=True)
+    st.markdown('<div class="login-title"> AI Diary</div>', unsafe_allow_html=True)
     st.markdown('<div class="login-sub">Your private space to reflect, understand, and grow.</div>', unsafe_allow_html=True)
  
     _, col, _ = st.columns([1, 1.5, 1])
@@ -274,8 +265,8 @@ def login_page():
  
         with tab_up:
             with st.form("signup_form"):
-                nu = st.text_input("Username", placeholder="Choose a username")
-                np_ = st.text_input("PIN", type="password", max_chars=4, placeholder="Choose a 4-digit PIN")
+                nu = st.text_input("Username", placeholder="pick a username")
+                np_ = st.text_input("PIN", type="password", max_chars=4, placeholder="Choose a 4 digit PIN")
                 cp = st.text_input("Confirm PIN", type="password", max_chars=4, placeholder="Confirm PIN")
                 if st.form_submit_button("Create Account →", use_container_width=True, type="primary"):
                     if not nu or not np_:
@@ -285,7 +276,7 @@ def login_page():
                     elif np_ != cp:
                         st.error("PINs do not match.")
                     elif nu in st.session_state.users:
-                        st.error("That username is already taken.")
+                        st.error("The username is already taken.")
                     else:
                         st.session_state.users[nu] = np_
                         st.session_state.logged_in = True
@@ -298,15 +289,15 @@ def login_page():
 
 def show_sidebar():
     with st.sidebar:
-        st.markdown('<div class="app-title">📔 AI Diary</div>', unsafe_allow_html=True)
+        st.markdown('<div class="app-title"> AI Diary</div>', unsafe_allow_html=True)
         st.markdown('<div class="app-sub">Your reflection companion</div>', unsafe_allow_html=True)
-        st.markdown(f'<div class="user-pill">👤 {st.session_state.username}</div>', unsafe_allow_html=True)
+        st.markdown(f'<div class="user-pill"> {st.session_state.username}</div>', unsafe_allow_html=True)
         st.markdown("---")
  
         for page_key, label in {
-            "Chat": "💬  Daily Reflection",
-            "Entries": "📖  Journal Entries",
-            "Analytics": "📊  Analytics"
+            "Chat": " Daily Reflection",
+            "Entries": " Journal Entries",
+            "Analytics": " Analytics"
         }.items():
             btn_type = "primary" if st.session_state.page == page_key else "secondary"
             if st.button(label, key=f"nav_{page_key}", use_container_width=True, type=btn_type):
@@ -314,7 +305,7 @@ def show_sidebar():
                 st.rerun()
  
         st.markdown("---")
-        if st.button("🚪  Log Out", use_container_width=True):
+        if st.button(" Log Out", use_container_width=True):
             st.session_state.logged_in = False
             st.session_state.username = ""
             st.session_state.chat_history = []
@@ -322,7 +313,7 @@ def show_sidebar():
  
         st.markdown(
             '<div style="font-size:10px;color:#1e293b;text-align:center;margin-top:20px;line-height:1.6;">'
-            '🔒 Prototype only.<br>No data stored or shared.</div>',
+            ' Prototype only.<br>No data stored or shared.</div>',
             unsafe_allow_html=True
         )
  
@@ -335,7 +326,7 @@ def chat_page():
     st.markdown(
         '<div class="page-header">'
         '<div class="header-title">✦ Daily Reflection</div>'
-        '<div class="header-sub">✨ Share your thoughts, feelings, and experiences</div>'
+        '<div class="header-sub"> Share your thoughts, feelings, and experiences</div>'
         '</div>',
         unsafe_allow_html=True
     )
@@ -370,7 +361,7 @@ def chat_page():
     with col_text:
         user_input = st.text_area(
             "message", label_visibility="collapsed",
-            placeholder="💭 Share your thoughts, feelings, or experiences...",
+            placeholder=" Share your thoughts, feelings, or experiences...",
             height=80, key="chat_input"
         )
     with col_btn:
@@ -407,7 +398,7 @@ def entries_page():
     show_disclaimer()
     st.markdown(
         '<div class="page-header">'
-        '<div class="header-title">📖 Journal Entries</div>'
+        '<div class="header-title"> Journal Entries</div>'
         '<div class="header-sub">Browse and review your past reflections</div>'
         '</div>',
         unsafe_allow_html=True
@@ -429,15 +420,14 @@ def entries_page():
  
     for entry in filtered:
         tags = "".join(f'<span class="emotion-tag">{em}</span>' for em in entry["emotions"][:4])
-        with st.expander(f"📅  {entry['timestamp']}  ·  {entry['primary'].capitalize()}"):
+        with st.expander(f" {entry['timestamp']}  ·  {entry['primary'].capitalize()}"):
             st.markdown(
                 f'<div style="font-size:13px;color:#cbd5e1;line-height:1.6;">{entry["text"]}</div>',
                 unsafe_allow_html=True
             )
             st.markdown(f'<div style="margin-top:8px;">{tags}</div>', unsafe_allow_html=True)
             ref = TEMPLATES.get(entry["primary"], TEMPLATES["neutral"])
-            st.markdown(f'<div class="reflection-box">💬 {ref}</div>', unsafe_allow_html=True)
- 
+            st.markdown(f'<div class="reflection-box"> {ref}</div>', unsafe_allow_html=True)
  
 # ======================================================
 # ANALYTICS PAGE
@@ -446,27 +436,27 @@ def analytics_page():
     show_disclaimer()
     st.markdown(
         '<div class="page-header">'
-        '<div class="header-title">📊 Analytics</div>'
+        '<div class="header-title">Analytics</div>'
         '<div class="header-sub">Your emotional patterns at a glance</div>'
         '</div>',
         unsafe_allow_html=True
     )
- 
+
     ue = [e for e in st.session_state.entries if e["username"] == st.session_state.username]
     if len(ue) < 2:
         st.info("Add at least 2 entries through the Daily Reflection page to see your analytics.")
         return
- 
+
     df = pd.DataFrame(ue)
     c1, c2, c3, c4 = st.columns(4)
     c1.metric("Total Entries", len(ue))
     c2.metric("Unique Emotions", len(set(e["primary"] for e in ue)))
     c3.metric("Top Emotion", df["primary"].value_counts().index[0].capitalize())
     c4.metric("Session Total", len(ue))
- 
+
     st.markdown("---")
     cl, cr = st.columns(2)
- 
+
     with cl:
         st.markdown("**Emotion Frequency**")
         all_emos = []
@@ -474,32 +464,23 @@ def analytics_page():
             all_emos.extend(e["emotions"])
         top8 = dict(sorted(Counter(all_emos).items(), key=lambda x: x[1], reverse=True)[:8])
         fig, ax = plt.subplots(figsize=(5, 4))
-        fig.patch.set_facecolor('#0a0f1e')
-        ax.set_facecolor('#0a0f1e')
-        ax.barh(list(top8.keys())[::-1], list(top8.values())[::-1], color='#6366f1', edgecolor='none', height=0.6)
-        ax.tick_params(colors='#94a3b8', labelsize=9)
-        for s in ax.spines.values():
-            s.set_color('#1e293b')
+        ax.barh(list(top8.keys())[::-1], list(top8.values())[::-1], edgecolor='none', height=0.6)
         ax.spines['top'].set_visible(False)
         ax.spines['right'].set_visible(False)
-        ax.grid(axis='x', color='#1e293b', linewidth=0.8)
+        ax.grid(axis='x', linewidth=0.8)
         plt.tight_layout()
         st.pyplot(fig)
         plt.close()
- 
+
     with cr:
         st.markdown("**Primary Emotion Distribution**")
         pc = df["primary"].value_counts()
-        colors = ['#60a5fa', '#a78bfa', '#34d399', '#f87171', '#fbbf24', '#818cf8', '#f472b6', '#2dd4bf']
         fig2, ax2 = plt.subplots(figsize=(5, 4))
-        fig2.patch.set_facecolor('#0a0f1e')
-        ax2.set_facecolor('#0a0f1e')
-        ax2.pie(pc.values, labels=pc.index, autopct='%1.0f%%',
-                colors=colors[:len(pc)], textprops={'color': '#94a3b8', 'fontsize': 9}, pctdistance=0.82)
+        ax2.pie(pc.values, labels=pc.index, autopct='%1.0f%%', pctdistance=0.82)
         plt.tight_layout()
         st.pyplot(fig2)
         plt.close()
- 
+
     if len(ue) >= 3:
         st.markdown("---")
         st.markdown("**Emotion Timeline**")
@@ -508,8 +489,8 @@ def analytics_page():
             for i, e in enumerate(reversed(ue))
         ])
         st.dataframe(tl, use_container_width=True, hide_index=True)
- 
- 
+
+
 # ======================================================
 # MAIN
 
@@ -525,7 +506,9 @@ def main():
         entries_page()
     elif page == "Analytics":
         analytics_page()
- 
- 
+
+
 if __name__ == "__main__":
     main()
+
+    
