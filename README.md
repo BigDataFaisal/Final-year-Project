@@ -105,7 +105,7 @@ All experiments were conducted in Google Colab using Python and HuggingFace Tran
 ## Video Demonstrations
 
 **FYP Demo Video**
-[TO BE ADDED]
+https://youtu.be/TMZ0yPa6grA 
 
 **IPD Demo Video**
 https://youtu.be/z1PQxvvUhIw
@@ -121,7 +121,6 @@ This repository supports the Final Year Project submission for module 6DATA007W 
 ## Author
 
 Faisal Qaderi
-W1897498
 BSc (Hons) Data Science and Analytics
 University of Westminster
 Supervisor: Dr Habeeb Bolugan
